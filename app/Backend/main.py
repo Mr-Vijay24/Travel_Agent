@@ -1,6 +1,17 @@
+# for api
 from fastapi import FastAPI
+# for database connect 
+from database.database import engine
+from database.models import Base
 
-app = FastAPI()
+Base.metadata.create_all(# it creates all the tables in the db
+    bind = engine
+)
+
+app = FastAPI(
+    title = "AI Travel Planner API",
+    version = "1.0.0"
+)
 
 @app.get("/")
 def home():
