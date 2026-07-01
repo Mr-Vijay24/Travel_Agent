@@ -10,6 +10,10 @@ class User(Base):
         primary_key=True,# it is a primary key for the table
         index=True# for fast acess to the data
     )
+    name = Column(
+        String(100),
+        nullable = False# it is a required field
+    )
     email = Column(
         String(100),
         unique=True,

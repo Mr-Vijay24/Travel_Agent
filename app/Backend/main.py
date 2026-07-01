@@ -3,14 +3,18 @@ from fastapi import FastAPI
 # for database connect 
 from database.database import engine
 from database.models import Base
-
-Base.metadata.create_all(# it creates all the tables in the db
-    bind = engine
-)
+# for register route
+from routes.register import router as register_router
 
 app = FastAPI(
     title = "AI Travel Planner API",
     version = "1.0.0"
+)
+
+app.include_router(register_router) 
+
+Base.metadata.create_all(# it creates all the tables in the db
+    bind = engine
 )
 
 @app.get("/")
@@ -33,11 +37,7 @@ def login():
     return {
         "message": "this is a login page"
     }
-@app.post("/register")
-def register():
-    return {
-        "message": "this is a register page"
-    }
+ 
 @app.get("/weather")
 def weather():
     return {
